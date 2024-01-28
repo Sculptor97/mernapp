@@ -14,7 +14,11 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: [true,'Please add a password']
-    }
+    },
+    goals:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Goal'
+    }]
 },{
     timestamps: true
 })

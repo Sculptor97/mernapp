@@ -49,7 +49,7 @@ const registerUser = asynHandler(async (req, res) => {
 
 //description Authenticate user
 //route POST api/users/
-//access private
+//access public
 const loginUser = asynHandler(async (req, res) => {
 
     const {email, password} = req.body
@@ -74,7 +74,13 @@ const loginUser = asynHandler(async (req, res) => {
 //route GET api/users/
 //access private
 const getMe = asynHandler(async (req, res) => {
-    res.status(200).json({message: 'Get User'})
+    const {_id, name, email, goals} = await User.findById(req.user.id)
+    res.status(200).json({
+        id: _id,
+        name,
+        email,
+        goals,
+    })
 })
 
 //generate token
